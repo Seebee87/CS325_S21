@@ -18,7 +18,53 @@ def MajorityBirthdays(Arr,start,end):
         MajorityBirthdays(Arr,start,mid)
         MajorityBirthdays(Arr,mid+1,end)
         merge(Arr,start, mid, end)
+"""
+  end cited code from exploration: Divide-And-Conquer Algorithms
+"""
+        monday = 0
+        tuesday = 0
+        wednesday = 0
+        thursday = 0
+        friday = 0
+        saturday = 0
+        sunday = 0
+        for i in range(len(Arr)):
+            if (Arr[i]==1):
+                monday = monday +1
+            elif (Arr[i]==2):
+                tuesday = tuesday +1
+            elif (Arr[i]==3):
+                wednesday = wednesday +1
+            elif (Arr[i]==4):
+                thursday = thursday +1
+            elif (Arr[i]==5):
+                friday = friday +1
+            elif (Arr[i]==6):
+                saturday = saturday +1
+            elif (Arr[i]==7):
+                sunday = sunday +1
+        mostCommon = monday
+        if(tuesday>mostCommon):
+            mostCommon = tuesday
+        if(wednesday>mostCommon):
+            mostCommon = wednesday
+        if(thursday>mostCommon):
+            mostCommon = thursday
+        if(friday>mostCommon):
+            mostCommon = friday
+        if(saturday>mostCommon):
+            mostCommon = saturday
+        if(sunday>mostCommon):
+            mostCommon = sunday
 
+        return mostCommon
+        
+"""
+code below is used from exploration: Divide-And-Conquer Algorithms
+title: Merge Sort solution
+Author: OSU coecs325 Instructor
+4/10/21 available at https://replit.com/@coecs325/Merge-Sort
+"""
 def merge(Arr, start, mid, end):
   #temporary arrays to copy the elements of subarray
   leftArray_size = (mid-start)+1
@@ -58,13 +104,13 @@ def merge(Arr, start, mid, end):
     Arr[k] = rightArray[j]
     k = k+1
     j = j+1
-
-
-if __name__ == '__main__':
-  Arr = [2,14,1,9,10,5,6,18,11]
-  MajorityBirthdays(Arr, 0, 8)
-  print(Arr)
-
   """
   end cited code from exploration: Divide-And-Conquer Algorithms
   """
+
+
+if __name__ == '__main__':
+  Arr = [1,2,5,3,3,5,6,3,4]
+  print(MajorityBirthdays(Arr, 0, 8))
+
+
