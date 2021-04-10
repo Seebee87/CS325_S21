@@ -1,0 +1,7 @@
+1. I spent aproximately 9 hours on this assignment, due to lack of time. It would have been more if the deadline was later. 
+2. Difficult
+3. 40%
+4. The homework prompts made no sense. The ways we were ment to use recursion and divide & conquer on problems where that may not be the best way was unintutive for learning the topic. 
+There needs to be more information on how to figure out the time cost for instructions, not just have it always given to us. Figuring out the equation to even work on proving for #3 took forever. 
+I retained most of the information I learned this past week from third party sources, not from the explorations. Sure it gets the job done but OSU takes my tuition and Abdul Bari is free on youtube. 
+Microsoft Teams is terrible compared to slack. Its a unfriendly and difficult way to have office hours. 

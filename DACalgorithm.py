@@ -10,9 +10,13 @@ title: Merge Sort solution
 Author: OSU coecs325 Instructor
 4/10/21 available at https://replit.com/@coecs325/Merge-Sort
 MajorityBirthdays replaced merge_sort to fit requirements for assignment
+first if statement added to adjust code to work without mandatory start and end paramaters
 """
 
-def MajorityBirthdays(Arr,start,end):
+def MajorityBirthdays(Arr,start=None,end=None):
+    if(start is None and end is None):
+        start = 0
+        end = len(Arr)
     if(start<end):
         mid = (start+end)//2 #Computes floor of middle value
         MajorityBirthdays(Arr,start,mid)
@@ -107,3 +111,5 @@ def merge(Arr, start, mid, end):
   """
   end cited code from exploration: Divide-And-Conquer Algorithms
   """
+Arr = [4,3,6,1,2,3,6,5,4,3,2,1]
+MajorityBirthdays(Arr)

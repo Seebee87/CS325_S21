@@ -1,0 +1,74 @@
+MajorityBirthday(days)
+    if start and end are none:
+        assign values to start and end
+    if (array start < array end):
+        mid = start + end //2 
+        MajorityBirthday(Arr, start, mid)
+        MajorityBirthday(Arr, mid+1, end)
+
+    Use of helper function Merge to get sorted array
+
+    Assign variable to each day of week
+    Monday = 0
+    Tuesday = 0
+    etc.
+
+    for i in length(Arr):
+        if Arr[i] is 1:
+            increment Monday
+        elif Arr[i] is 2:
+            increment for Tuesday
+        repeat for each day of the week using elif
+
+    mostCommon = monday
+    if (mostCommon < Tuesday):
+        mostCommon = Tuesday
+    repeat for each day of the week using if not elif
+
+"""
+code below is used from exploration: Divide-And-Conquer Algorithms
+title: Merge Sort Pseudocode
+Author: OSU coecs325 Instructor
+4/10/21 available at https://canvas.oregonstate.edu/courses/1810910/pages/exploration-divide-and-conquer-algorithms?module_item_id=20787195
+no code will be changed to implement the merge, so this Pseudocode will be accurate. 
+"""
+
+merge(Arr, start, mid, end):
+  #temporary arrays to copy the elements of subarray
+  leftArray_size = (mid-start)+1
+  rightArray_size = (end-mid)
+
+  leftArray = [0]*leftArray_size
+  rightArray = [0]*rightArray_size
+
+  for i in range(0, leftArray_size):
+    leftArray[i] = Arr[start+i]
+
+  for i in range(0, rightArray_size):
+    rightArray[i] = Arr[mid+1+i]
+
+  i=0
+  j=0
+  k=start
+
+  while (i < leftArray_size and j < rightArray_size):
+    if (leftArray[i] < rightArray[j]):
+      # filling the original array with the smaller element
+      Arr[k] = leftArray[i]
+      i = i+1
+    else:
+      # filling the original array with the smaller element
+      Arr[k] = rightArray[j]
+      j = j+1
+    k = k+1
+
+  # copying remaining elements if any
+  while (i<leftArray_size):
+    Arr[k] = leftArray[i]
+    k = k+1
+    i = i+1
+
+  while (j<rightArray_size):
+    Arr[k] = rightArray[j]
+    k = k+1
+    j = j+1
