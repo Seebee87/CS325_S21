@@ -15,8 +15,8 @@ MajorityBirthdays replaced merge_sort to fit requirements for assignment
 def MajorityBirthdays(Arr,start,end):
     if(start<end):
         mid = (start+end)//2 #Computes floor of middle value
-        MajorityBirthdays(Arr, start, end)(Arr,start,mid)
-        MajorityBirthdays(Arr, start, end)(Arr,mid+1,end)
+        MajorityBirthdays(Arr,start,mid)
+        MajorityBirthdays(Arr,mid+1,end)
         merge(Arr,start, mid, end)
 
 def merge(Arr, start, mid, end):
@@ -62,10 +62,9 @@ def merge(Arr, start, mid, end):
 
 if __name__ == '__main__':
   Arr = [2,14,1,9,10,5,6,18,11]
-  merge_sort(Arr, 0, 8)
+  MajorityBirthdays(Arr, 0, 8)
   print(Arr)
 
   """
   end cited code from exploration: Divide-And-Conquer Algorithms
   """
-  
