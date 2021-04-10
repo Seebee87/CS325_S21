@@ -18,9 +18,9 @@ def MajorityBirthdays(Arr,start,end):
         MajorityBirthdays(Arr,start,mid)
         MajorityBirthdays(Arr,mid+1,end)
         merge(Arr,start, mid, end)
-"""
-  end cited code from exploration: Divide-And-Conquer Algorithms
-"""
+        """
+        end cited code from exploration: Divide-And-Conquer Algorithms
+        """
         monday = 0
         tuesday = 0
         wednesday = 0
@@ -107,10 +107,3 @@ def merge(Arr, start, mid, end):
   """
   end cited code from exploration: Divide-And-Conquer Algorithms
   """
-
-
-if __name__ == '__main__':
-  Arr = [1,2,5,3,3,5,6,3,4]
-  print(MajorityBirthdays(Arr, 0, 8))
-
-
