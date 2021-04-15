@@ -1,0 +1,20 @@
+def stairs(array):
+    
+    for i in range(0,2):
+        fastest = helper(array,i,array[i],1)
+        
+
+
+
+def helper(array, start, total, inc)
+    if start + inc == len(array):
+        return total
+    else:
+        new_total = total + array[start + inc]
+        first_branch = helper(array, start, new_total, 1)
+    if start + 2 < len(array):
+        second_branch = helper(array, start), total, 2)
+    if branch < first_branch:
+        return branch
+    else: 
+        return first_branch
