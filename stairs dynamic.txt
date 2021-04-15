@@ -1,0 +1,9 @@
+Dynamic Solution (Bottom Up):
+
+def stairs(array):
+    memo =  [0]*len(array)
+    memo[0] = array[0]
+    memo[1] = array[1]
+    for i in range(2,len(array)):
+        memo[i] = array[i] + min(memo[i-1], memo[i-2])
+    return memo[len(memo-1)]

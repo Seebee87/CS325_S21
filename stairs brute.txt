@@ -1,0 +1,31 @@
+stairs(array)
+    one_start = 0
+    two_start = 0
+
+    for i in range(0,2):
+        sum = helper(array, i, array[i])                                2T(n)
+        if i == 0:
+            one_start = sum
+        else:
+            two_start = sum
+    return min(one_start, two_start)
+
+
+helper(array, location, total):
+    if array[location + 1] outside bounds of array:                     1
+        return total
+    if array[location + 1] inside bounds of array:
+        total = total + array[location+1]
+        one_step = helper(array, location+1, total)     T(n-1)
+    if array[location + 2] inside bounds of array:
+        total = total + array[location + 2]
+        two_step = helper(array, location+2, total)     T(n-2)
+    return min(one_step, two_step)
+    
+
+total time complexity is 2T(n^2)
+
+        
+
+
+
