@@ -16,10 +16,10 @@ helper(array, location, total):
         return total
     if array[location + 1] inside bounds of array:
         total = total + array[location+1]
-        one_step = helper(array, location+1, total)     T(n-1)
+        one_step = helper(array, location+1, total)                     T(n-1)
     if array[location + 2] inside bounds of array:
         total = total + array[location + 2]
-        two_step = helper(array, location+2, total)     T(n-2)
+        two_step = helper(array, location+2, total)                     T(n-2)
     return min(one_step, two_step)
     
 
