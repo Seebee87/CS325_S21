@@ -39,5 +39,12 @@ previous ones wont work for the next dog. Return the counter when done with the 
 for how many dogs you fed. 
 
 #2 - C) The sort function built into python is O(nlogn) and the for loop is just O(n) 
-so the time complexity for this would be O(nlogn) as that is the most signifigant. 
+so the time complexity for this would be O(nlogn) as that is the most signifigant.
+
+
+DEBRIEFING:
+1) 10-12
+2) Moderate, I am having difficulty with the same aspects I have had from earlier in the course.
+The new material I am able to grasp, but calculating and knowing time complexities is hard.
+3) 75%
     
