@@ -1,0 +1,24 @@
+I. Problem A
+Approach 1 Description: For approach one I used the idea behind the LCS from
+the explorations. 
+def checkPalindrome_1(string, k):
+    if string is empty - return True
+    save following to a variable:   lowercase string 
+                                    reverse of lowercase string
+                                    string length
+    pal_helper_1(string, reversed_string, length, incorrect_counter)
+    if return of pal_helper_1 is greater than K:
+        return False
+    else: 
+        return True
+
+def pal_helper_1(string1, string2, length, incorrect):
+    if string empty - return current value of incorrect
+        #incorrect will be what tracks how many characters are not matching, needs
+        # to be equal to or less than K. 
+    if first character of both strings match:
+        recursive pal_helper_1(string1[1:], string2[1:], length-1, incorrect)
+    else if first dont match:
+        recursive pal_helper_1(string1[1:], string2[1:], length-1, incorrect+1)
+    
+

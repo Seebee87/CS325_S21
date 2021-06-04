@@ -48,5 +48,6 @@ def pal_helper_2(string1, string2, len1, len2):
     print(cuts)
     return cuts
     
+print(checkPalindrome_1("abcdnondba", 3))
 
 
