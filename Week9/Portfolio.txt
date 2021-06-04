@@ -1,24 +1,153 @@
 I. Problem A
-Approach 1 Description: For approach one I used the idea behind the LCS from
-the explorations. 
-def checkPalindrome_1(string, k):
-    if string is empty - return True
-    save following to a variable:   lowercase string 
-                                    reverse of lowercase string
-                                    string length
-    pal_helper_1(string, reversed_string, length, incorrect_counter)
-    if return of pal_helper_1 is greater than K:
-        return False
-    else: 
-        return True
+Approach 1 - Description:
+    For the first approach on the problem the general stragety was to take
+the string and its reversed copy, and compare the last character in each via a
+helper function. The helper function is passed the string, the reversed string, and
+a length for both, which originally is the same variable. If the last character in 
+both strings is the same, there is a single recursive call to the helper function
+that passes both strings again, and removes one from both length variables. However
+if the current characters being compared are not equal, then we call two recursive
+helper functions and take the minimum value returned from them. Because we need to 
+return the minuimum from both, each call will branch down two paths every time there is
+not a matching character. The two recursive calls would pass the following arguments:
 
-def pal_helper_1(string1, string2, length, incorrect):
-    if string empty - return current value of incorrect
-        #incorrect will be what tracks how many characters are not matching, needs
-        # to be equal to or less than K. 
-    if first character of both strings match:
-        recursive pal_helper_1(string1[1:], string2[1:], length-1, incorrect)
-    else if first dont match:
-        recursive pal_helper_1(string1[1:], string2[1:], length-1, incorrect+1)
-    
+min(    palindrome_helper(string, reversed, len1-1, len2),
+        panindrome_helper(string, reversed, len1, len2-1)
 
+Our function will first run the recursive call where we decuct 1 from len1. This
+will need to be completed before the second recursive call will run where we check 
+if deducting 1 from len2 will result in less characters removed. Because this calls
+two recursive functions that each need to complete the entire length of the string,
+and each have their own possibility of branching, this will result in exponential time
+complexity. 
+
+Once we return a minimum value from the recursive calls, we need to return that number
+to the original function and compare it to k*2. We need to compare it to k*2 and not just k
+because we are only checking if the original string is a k-palindrome, and our algorithm
+checks two strings, the original and the reversed one. This results in duplicating the number
+of cuts required to make it a palindrome. 
+
+Time Complexity (Approach 1): The worst case for this is that there are no matching characters
+in the string and reversed string, which would lead to a O(2^n) complexity. 
+
+Approach 2 - Description: 
+    For the second approach I used dynamic programming with a bottom-up 
+approach using a matrix. Similar to the first approach, I first made a 
+variable holding the reversed string and then made a table called memo
+that was len(string+1) x len(string+1). Once the table was created we iterate
+through it with two consecutive for loops. The for loops take variable i and from 0
+to range(string_length +1) then also iterates over variable j in the same range.
+We then do 3 possible comparisons for each cell in the matrix: 
+
+1) If either i or j is zero, then that means the current string length is zero and cant match any amount
+of other characters, so the value added to that matrix cell is i+j (one is zero,
+so this just adds the length of the other one). 
+2) If the character at string[i-1] is equal to the character at reversed_string[j-1]
+(remember neither are zero, so we wont run into any issues where we are looking for a 
+negative index) then we have a match, and the amount of letters that need to be removed
+up to that point in the comparison of the two strings is equal to [i-1][j-1] or the value
+in the top-left cell diagonally.
+3) Else, if the top two conditions are not met then the characters being compared at that
+matrix cell are not equal. Since we already have how many characters need to be cut
+memoized in the table, we just need to take whichever is the minimum of the cell above
+the current one, or to the left. We add one to that, to account for the current cut,
+and move on to the next cell.
+
+At the end of both for loops, we will have a value in memo[string_length][string_length]
+that is the minumum number of mismatching characters. Like in the first approach, since
+we are finding mismatching characters in both the original string and the reversed string,
+the number returned is double what it would be, so we compare that to k*2. If 
+memo[len][len] is <= k*2 then its a k-palindrome. 
+
+Time Complexity (Approach 2): The time complexity for this relies on the two for loops. Each loops
+has a range of the length of the string, making the time complexity for this O(n^2)
+
+Bonus 1: Yes approach 2 is signifigantly better as the size of the string increases.
+For very small inputs, or for inputs that are already palindroms that dont require
+any cuts the first approach may be faster, but overall the second approach is superior.
+Approach 1 runs on exponential time, which is really not ideal. Approach 2 however runs
+in quadratic time. Approach 2 will always run through the nested for loop of the 
+length of the string, but wont every need to do more than that. 
+
+Bonus 2: I used a lot of the techniques learned in this course. For my first approach, 
+I relied heavily on the information I learned in the Dynamic Programming exploration
+about the longest common subsequence. Using the same idea behind the recursive solution
+for the LCS I was able to find the answer in exponential time. However, with the same
+basic informtion leanred I was also able to improve on that dynamic programming solution
+and implemented a bottom-up solution as approach 2. Both approaches at their core rely on
+the bones of the LCS problem, but they are implemented with different strategies to improve
+one time complexity over another. 
+
+
+Problem B: For this patternmatch problem I used a solution I am familiar with from approach 2
+in problem A, a dynamic programming solution implementing a bottom-up approach using a 
+matrix. The program begins setting variables for both the length of the pattern and the string
+as well as creating a memoization table of pattern_length x string_length.
+
+After the table is created we go through each cell of the matrix. Within the second for loop
+I have set up an if statement for a different set of code if either of the for loops current
+value is set to 0 (which would be a empty string or empty pattern). Within this if statement
+there are a few simple checks to see how to handle the empty string. The only one that needs
+any clarification is if the first item of the pattern is *, in which case you would copy
+true to the first cell instead of false, since * can match an empty string.
+
+Once we get out of the if statements for empty strings, there are 3 outcomes that can occur:
+1) If the pattern matches the string or the pattern character is ? then we copy 
+memo[i-1][j-1] to the current location. 
+2) The pattern and the string characters dont match, but the pattern character is * which allows
+us to take either memo[i-1][j] or memo[i][j-1], whichever is greater or whichever is True
+in this case (since True has a greater value than False).
+3) Pattern and string dont match, no special character for pattern in which case the table
+will read false. 
+
+We return the bottom right corner of the table, which is a boolean value for our answer. 
+
+Time Complexity (Problem B): Similar to Problem A Approach 2 - this is going to have a 
+time complexity of O(m*n) where m is the length of the string and n is the length of the pattern.
+We get this time complexity from the nexted for loop that will execute (m*n) times, and all 
+other operations are considered constant time. 
+
+Bonus: Again, similar to Problem A Approach 2, I used dynamic programming with a memoization
+table and a bottom up approach as we had used numerous times during our course. I was happy 
+to get to use the tabulation method as explained in Exploration: Dynamic Programming Fundamentals
+since in my pervious assignments using bottom-up I did not use a table. 
+
+
+Problem C: For this problem, I again was able to implement a solution using a matrix and 
+dynamic programming. Because we are passed a matrix, and I needed to create a blank one, 
+there is slightly more space complexity on my solution. In order to find my tesla keys,
+first I created an empty matrix that matches the size of the one passed in the function. 
+Once I had that made, I iterated through it with two for loops, going in reverse (starting
+at the last cell in the matrix and working backwards). I did this because it was easier to 
+work from the end to a solution, than to start at the beginning and track your health the whole
+time. Starting at the beginning could lead to an issue where the last cell in the matrix
+had a huge HP increase, and you would have ended with a positive health, but could have been
+negative earlier in the maze. Working backwards you know what you need to begin with to complete
+the maze along a specific path. 
+
+inside the for loops I had some simple code to fill in the empty array. First I solved
+for the cell to the left (assuming not at the edge) and then solved for the cell above.
+The cell to the left should have always been empty, as thats how the matrix was created. 
+However the cell above I needed an additional if statement incase it was filled. This was just
+to find the max value between the path from below vs from the right. 
+
+The answer is the number located at maze[0][0]. If that was negative I took the absolut
+value and added one. If it was positve I just returned 1. 
+
+Time Complexity: Same as the last two matrix solutions I did, this is going to have a time
+complexity of O(m*n) where m and n are the sizes of the matrix rows and columns. Everything 
+else works in constant time.  
+
+Bonus: It may seem like a cop-out, but since I used the same information to implement this solution
+as Problem A Approahc 2 and Problem B the materials I used to solve this and what I learned are the same. 
+I hope that wont hurt the points for the bonus score, but its just going to be a copy paste of the above:
+I used dynamic programming with a memoization table and a bottom up approach as we had used numerous times during our course. I was happy 
+to get to use the tabulation method as explained in Exploration: Dynamic Programming Fundamentals
+since in my pervious assignments using bottom-up I did not use a table. 
+
+DEBRIEFING:
+1. Aprox 20 hours total on this, including time writing out solutions and thinking of how to implement them. 
+2. Moderate, it would have been difficult if the problems has a different varity of solutions. No graphs?!?!
+3. Fairly well, 80%.
+4. Would have liked to have had something to work on that was a little different. I used the same
+basic approach for all 3 problems because all 3 were so similar. 
